@@ -18,7 +18,10 @@ def SaveProfile(request):
             
     else:
         MyProfileForm=ProfileForm()
-        return render(request,'saved.html',locals())
+
+    print(locals())
+
+    return render(request,'saved.html',locals())
 
 def profile_create(request):
     return render(request,'profile.html')
