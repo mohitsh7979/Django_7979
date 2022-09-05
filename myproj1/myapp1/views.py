@@ -11,3 +11,4 @@ def index(request):
     else:
         student=studentForms()
         return render(request,"index.html",{'form':student})
+

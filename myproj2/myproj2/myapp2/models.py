@@ -8,4 +8,7 @@ class Profile(models.Model):
     class Meta:
         db_table="profile"
 
+    def __str__(self):
+        return self.name
+
 # Create your models here.

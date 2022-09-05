@@ -20,7 +20,7 @@ def SaveProfile(request):
         MyProfileForm=ProfileForm()
 
     print(locals())
-
+    
     return render(request,'saved.html',locals())
 
 def profile_create(request):
