@@ -15,9 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from shoping_app import views
+from myapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('header/',views.header),
+    path('',views.index),
+    path('home/',views.home),
+    path('men/',views.men),
+    path('women/',views.women),
+    path('kids/',views.kids),
+    path('signup',views.signuphandle,name="signuphandle"),
+    path('login',views.loginhandle,name="loginhandle"),
+    path('logout/',views.logouthandle,name="logouthandle")
 ]

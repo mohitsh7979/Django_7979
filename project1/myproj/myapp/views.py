@@ -6,6 +6,9 @@ from django.contrib.auth import logout
 from django.contrib.auth import authenticate
 from myapp.models import shoping
 from myapp.forms import shopingform
+from django.contrib.auth.backends import BaseBackend
+
+
 
 # Create your views here.
 def index(request):
@@ -54,13 +57,34 @@ def loginhandle(request):
     if request.method == 'POST':
         username = request.POST['loginusername']
         password = request.POST['pass']
-        user = authenticate(request, name=username, password=password)
+        print("username")
+        print(username)
+        print(password)
+        myshoping=shoping()
+        myshoping.name=username
+        myshoping.password=password
+        myshoping.save()
+        class shoping(models.Model):
+            def authenticate(self, request, name=username, password=password):
+                return name,password
+
+        user=authenticate()
         if user is not None:
-            login(request, user)
+            login(request,user)
             return redirect("/kids")
         else:
             
             return redirect("/about")
+         
+        # user = authenticate(request, name=username, password=password)
+        # print(user)
+
+        # if user is not None:
+        #     login(request,user)
+        #     return redirect("/kids")
+        # else:
+            
+        #     return redirect("/about")
         
 
 def logouthandle(request):
