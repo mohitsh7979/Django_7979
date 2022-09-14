@@ -7,14 +7,21 @@ from django.contrib.auth import authenticate
 from myapp.models import shoping
 from myapp.forms import shopingform
 from django.contrib.auth.backends import BaseBackend
+from .models import product
+from math import ceil
 
 
 
 # Create your views here.
 def index(request):
     return render(request,'home.html')
-def home(request):
-    return render(request,'home.html')
+def new(request):
+    products=product.objects.all()
+    context={'products': products}
+      
+    
+    return render(request,'new.html',context)
+ 
 
 def men(request):
     return render(request,'men.html')
@@ -24,6 +31,9 @@ def women(request):
 
 def kids(request):
     return render(request,'kids.html')
+
+def home(request):
+    return render(request,'home.html')
 
 def electronics(request):
     return render(request,'elctronics.html')
@@ -64,9 +74,7 @@ def loginhandle(request):
         myshoping.name=username
         myshoping.password=password
         myshoping.save()
-        class shoping(models.Model):
-            def authenticate(self, request, name=username, password=password):
-                return name,password
+        
 
         user=authenticate()
         if user is not None:
