@@ -30,5 +30,5 @@ urlpatterns = [
     path('signup',views.signuphandle,name="signuphandle"),
     path('login',views.loginhandle,name="loginhandle"),
     path('logout/',views.logouthandle,name="logouthandle"),
-    path('men/abc/',views.abc),
+    path('abc/<int:pk>',views.abc),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

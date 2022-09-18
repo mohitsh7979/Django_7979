@@ -48,60 +48,17 @@
 <body>
 ​
 <h2 style="text-align:center">Women's Product</h2>
-​
+​{% for wom in womenproducts %}
 <div class="card">
   <a href="">
-  <img src="https://images.meesho.com/images/products/6542616/56a42_512.webp" alt="Denim Jeans" style="width:100%" class="mens">
-  <h1>Tops</h1>
-  <p class="price">$19.99</p>
-  <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum</p>
+  <img src="/media/{{wom.image}}" style="width:100%" class="mens">
+  <h1>{{wom.title}}</h1>
+  <p class="price">{{wom.price}}</p>
+  <p>{{wom.desc}}</p>
   
   </a></div>
-<div class="card">
-  <a href="">
-    <img src="https://images.meesho.com/images/products/75470657/1wnvu_512.webp" alt="Denim Jeans" style="width:100%" class="mens">
-    <h1>Denim Jeans</h1>
-    <p class="price">$19.99</p>
-    <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
-    </a>
-  </div>
-  <div class="card">
-    <a href="">
-    <img src="https://images.meesho.com/images/products/49139000/zqxea_512.webp" alt="Denim Jeans" style="width:100%" class="mens">
-    <h1>palazoos</h1>
-    <p class="price">$19.99</p>
-    <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
-    
-    </a>
-  </div>
-  <div class="card">
-    <a href="">
-    <img src="https://images.meesho.com/images/products/132359539/y4z03_512.webp" alt="Denim Jeans" style="width:100%" class="mens">
-    <h1>Night Suits</h1>
-    <p class="price">$19.99</p>
-    <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
-    
-    </a>
-  </div>
-  <div class="card">
-    <a href="">
-    <img src="https://images.meesho.com/images/products/134440603/bspbj_512.webp" alt="Denim Jeans" style="width:100%"class="mens">
-    <h1>Sarees</h1>
-    <p class="price">$19.99</p>
-    <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
-    
-    </a>
-  </div>
-  <div class="card">
-    <a href="">
-    <img src="https://images.meesho.com/images/products/54202601/ydccs_512.webp" alt="Denim Jeans" style="width:100%"class="mens">
-    <h1>Ladies Bags</h1>
-    <p class="price">$19.99</p>
-    <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
-    
-    </a>
-  </div>
-​
+{% endfor %}
+
 </body>
 </html>
 {% endblock body %}

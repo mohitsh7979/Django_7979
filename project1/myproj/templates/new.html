@@ -52,31 +52,25 @@
 </head>
 <body>
 ​
-<h2 style="text-align:center">Men's Product</h2>
+{% comment %} <h2 style="text-align:center">Men's Product</h2> {% endcomment %}
 
+{% for pro in products %}
+<div class="card">
 
-​{% for Product in Products %}
-
-{% comment %} <div class="card">
-  <a href="abc"><img src="/media/{{i.image}}" alt="Denim Jeans" style="width:100%" class="mens">
-  <h1>T-shirt</h1>
-  <p class="price">$19.99</p>
-  <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum</p>
-  </a>
-</div> {% endcomment %}
-<h1>Hello</h1>
+   <a href="abc"><img src="image/{{pro.image}}"  style="width:100%" class="mens">
+   <h1>{{pro.title}}</h1>
+   <p class="price">{{pro.price}}</p>
+   <p>{{pro.desc}}</p>
+   </a> 
+{% comment %} <h1><img src="{media/{Pro.imag}}"  style="width:100%" class="mens"></h1> 
+<h1>{{pro.title}}</h1>
+<h1>{{pro.price}}</h1>
+<h1>{{pro.desc}}</h1>
+     {% endcomment %}
+</div>  
 {% endfor %}
  
-{% comment %} <div class="card">
-  <a href="">
-    <img src="https://images.unsplash.com/photo-1605518216938-7c31b7b14ad0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1309&q=80" alt="Denim Jeans" style="width:100%" class="mens">
-    <h1>Denim Jeans</h1>
-    <p class="price">$19.99</p>
-    <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
-    </a>
-  </div> {% endcomment %}
-  
-​
+ 
 </body>
 </html>
 ​

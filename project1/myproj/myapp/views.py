@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate
 from myapp.models import shoping
 from myapp.forms import shopingform
 from django.contrib.auth.backends import BaseBackend
-from .models import product
+from myapp.models import *
 from math import ceil
 
 
@@ -18,19 +18,35 @@ def index(request):
 def new(request):
     products=product.objects.all()
     context={'products': products}
-      
-    
+    print(products)
     return render(request,'new.html',context)
+
+def abc(request,pk):
+    products=product.objects.filter(pk=pk)
+    context={'products':products[0]}
+    print(products)
+    return render(request,'abc.html',context)
  
 
 def men(request):
-    return render(request,'men.html')
+    products=product.objects.all()
+    context={'products': products}
+    print(products)
+    return render(request,'men.html',context)
 
 def women(request):
-    return render(request,'women.html')
+    womenproducts=womenproduct.objects.all()
+    context={'womenproducts': womenproducts}
+    print(womenproducts)
+    return render(request,'women.html',context)
+
 
 def kids(request):
-    return render(request,'kids.html')
+    kidsproducts=kidsproduct.objects.all()
+    context={'kidsproducts': kidsproducts}
+    print(kidsproducts)
+    return render(request,'kids.html',context)
+    
 
 def home(request):
     return render(request,'home.html')
