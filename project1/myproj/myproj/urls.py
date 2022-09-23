@@ -27,8 +27,12 @@ urlpatterns = [
     path('women/',views.women),
     path('kids/',views.kids),
     path('new/',views.new),
+    # path('abc/',views.abc,name="abc"),
     path('signup',views.signuphandle,name="signuphandle"),
     path('login',views.loginhandle,name="loginhandle"),
     path('logout/',views.logouthandle,name="logouthandle"),
-    path('abc/<int:pk>',views.abc),
+    path('abc/<int:price>',views.abc,name="abc"),
+    path('womenproduct/<int:id>',views.womenproducts,name="womenproducts"),
+    path('kidproduct/<int:id>',views.kidproducts,name="kidproducts"),
+    path('buy/',views.buynow,name="bynow")
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

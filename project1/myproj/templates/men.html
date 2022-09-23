@@ -55,12 +55,12 @@
 <h2 style="text-align:center">Men's Product</h2>
 ​
 {% for pro  in products %}
-<div class="card">
-  <a href="/abc/{{pro.pk}}">
-    <img src="/media/{{pro.image}}" alt="Denim Jeans" style="width:100%" class="mens">
-    <h1>{{pro.title}}</h1>
-    <p class="price">{{pro.price}}</p>
-    <p>{{pro.desc}}</p>
+  <div class="card">
+    <a href="/abc/{{ pro.price }}">
+      <img src="/media/{{ pro.image }}" alt="Denim Jeans" style="width:100%" class="mens">
+      <h1>{{pro.title}}</h1>
+      <p class="price">{{pro.price}}</p>
+      <p>{{pro.desc}}</p>
     </a>
   </div>
 {% endfor %}

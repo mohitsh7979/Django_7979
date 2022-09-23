@@ -51,7 +51,7 @@
 <h2 style="text-align:center">Kids's Product</h2>
 ​{% for kid in kidsproducts %}
 <div class="card">
-  <a href="">
+  <a href="/kidproduct/{{ kid.id }}">
   <img src="/media/{{kid.image}}" alt="Denim Jeans" style="width:100%" class="mens">
   <h1>{{kid.title}}</h1>
   <p class="price">{{kid.price}}</p>

@@ -50,7 +50,7 @@
 <h2 style="text-align:center">Women's Product</h2>
 ​{% for wom in womenproducts %}
 <div class="card">
-  <a href="">
+  <a href="/womenproduct/{{ wom.id }}">
   <img src="/media/{{wom.image}}" style="width:100%" class="mens">
   <h1>{{wom.title}}</h1>
   <p class="price">{{wom.price}}</p>
@@ -58,6 +58,8 @@
   
   </a></div>
 {% endfor %}
+
+
 
 </body>
 </html>

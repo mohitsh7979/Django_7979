@@ -21,19 +21,48 @@ def new(request):
     print(products)
     return render(request,'new.html',context)
 
-def abc(request,pk):
-    products=product.objects.filter(pk=pk)
-    context={'products':products[0]}
-    print(products)
-    return render(request,'abc.html',context)
- 
+def buynow(request):
+    if request.method=="POST":
+        # items_json= request.POST('itemsJson', '')
+        name=request.POST['name']
+        email=request.POST['email']
+        state=request.POST['state']
+        city=request.POST['city']
+        address=request.POST['address']
+        zip=request.POST['zip']
 
+        myuser=order(name=name,email=email,state=state,city=city,address=address,zip_code=zip)
+        messages.success(request,"succeffull")
+        myuser.save()
+        
+    return render(request,'buynow.html')
+
+    
 def men(request):
-    products=product.objects.all()
+    products=menproduct.objects.all()
     context={'products': products}
     print(products)
     return render(request,'men.html',context)
 
+def abc(request,price):
+    menproducts=menproduct.objects.filter(price=price)
+    context={'menproducts':menproducts[0]}
+    print(menproducts)
+    return render(request,'abc.html',context)
+
+def womenproducts(request,id):
+    womproducts=womenproduct.objects.filter(id=id)
+    context={'womproducts':womproducts[0]}
+    print(womproducts)
+    return render(request,'womenproductview.html',context)
+    
+def kidproducts(request,id):
+    kidproducts=kidsproduct.objects.filter(id=id)
+    context={'kidproducts':kidproducts[0]}
+    print(kidproducts)
+    return render(request,'kidsproductview.html',context)
+     
+    
 def women(request):
     womenproducts=womenproduct.objects.all()
     context={'womenproducts': womenproducts}
@@ -83,22 +112,21 @@ def loginhandle(request):
     if request.method == 'POST':
         username = request.POST['loginusername']
         password = request.POST['pass']
-        print("username")
-        print(username)
-        print(password)
-        myshoping=shoping()
-        myshoping.name=username
-        myshoping.password=password
-        myshoping.save()
+        # print("username")
+        # print(username)
+        # print(password)
+        # myshoping=shoping()
+        # myshoping.name=username
+        # myshoping.password=password
+        # myshoping.save()
         
 
-        user=authenticate()
+        user=shoping(request, name=username, password=password)
         if user is not None:
             login(request,user)
             return redirect("/kids")
         else:
-            
-            return redirect("/about")
+             return redirect("/about")
          
         # user = authenticate(request, name=username, password=password)
         # print(user)
