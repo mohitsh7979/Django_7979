@@ -80,6 +80,9 @@
             height: 57px;
             background-color: transparent;
         }
+        .buy{
+              margin:-96px 214px;
+        }
     </style>
 </head>
 
@@ -125,10 +128,18 @@
         <p class="text"> Country of Origin : INDIA</p>
     </div>
     <div class="container28">
-        <span id="divpr{{womproducts.id}}" class="divpr">
+        <form action="/add-to-cart/" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="prod_id" value="{{womproducts.id}}" id="prod_id">
+            <button type="submit" class="btn23" >Add To Cart</button>
+            
+        </form>
+        {% comment %} <span id="divpr{{womproducts.id}}" class="divpr">  by code 
             <button id="pr{{womproducts.id}}" class="btn23 cart">Add To Cart</button>
-        </span>
+        </span> {% endcomment %}
+        <form action="/buy" class="buy">
         <button class="btn23">Buy Now</button>
+        </form>
     </div>
 
 </body>

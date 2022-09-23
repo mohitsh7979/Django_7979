@@ -23,19 +23,41 @@ def new(request):
 
 def buynow(request):
     if request.method=="POST":
-        # items_json= request.POST('itemsJson', '')
+        items_json= request.POST['itemsJson']
         name=request.POST['name']
         email=request.POST['email']
         state=request.POST['state']
         city=request.POST['city']
-        address=request.POST['address']
+        address=request.POST['address']+" "+request.POST['address2']
         zip=request.POST['zip']
 
-        myuser=order(name=name,email=email,state=state,city=city,address=address,zip_code=zip)
+        myuser=order(name=name,email=email,state=state,city=city,address=address,zip_code=zip, items_json= items_json)
         messages.success(request,"succeffull")
         myuser.save()
+        thank=True
+        return render(request,'buynow.html',{'thank':thank})
+
         
     return render(request,'buynow.html')
+def add(request):
+    return render(request,'addtocart.html')
+
+def addtocart(request):
+    if request.method=="POST":  
+      user=request.user
+      product_id=request.POST['prod_id']
+      wproduct=womenproduct.objects.get(id=product_id)
+      mproduct=menproduct.objects.get(id=product_id)
+      kproduct=kidsproduct.objects.get(id=product_id)
+      cart(user=user,wproduct=wproduct,mproduct=mproduct,kproduct=kproduct).save()
+      return redirect("/cart")
+
+def showcart(request):
+    user=request.user
+    cat=cart.objects.filter(user=user)
+    return render(request,'addtocart.html',{'carts':cat})
+
+
 
     
 def men(request):

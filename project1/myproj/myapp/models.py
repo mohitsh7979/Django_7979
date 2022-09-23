@@ -3,6 +3,8 @@ import email
 from email.policy import default
 from turtle import title
 from django.db import models
+from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator,MinValueValidator
 
 
 # Create your models here.
@@ -49,7 +51,7 @@ class kidsproduct(models.Model):
 
 class order(models.Model):
     order_id= models.AutoField(primary_key=True)
-    # items_json= models.CharField(max_length=5000)
+    items_json= models.CharField(max_length=5000)
     name=models.CharField(max_length=100)
     email=models.CharField(max_length=100)
     address=models.CharField(max_length=100)
@@ -60,6 +62,17 @@ class order(models.Model):
 
     def __str__(self):
       return self.name
+
+class cart(models.Model):
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
+    wproduct=models.ForeignKey(womenproduct, on_delete=models.CASCADE)
+    mproduct=models.ForeignKey(menproduct,on_delete=models.CASCADE)
+    kproduct=models.ForeignKey(kidsproduct, on_delete=models.CASCADE)
+    quantity=models.PositiveIntegerField(default=1)
+
+    # def __str__(self):
+    #     return self.user
+
 
 
 

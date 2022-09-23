@@ -8,6 +8,7 @@ admin.site.register(shoping)
 # admin.site.register(womenproduct)
 admin.site.register(kidsproduct)
 admin.site.register(order)
+admin.site.register(cart)
 
 
 @admin.register(menproduct)

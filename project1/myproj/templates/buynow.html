@@ -37,8 +37,10 @@
         </div>
         <h1>Enter Address $ other details</h1>
          <div>
-            <form class="row g-3" method="post" action="#">
+           {% comment %} {% if user.is_authenticated  %} {% endcomment %}
+           <form class="row g-3" method="post" action="/buy/">
                 {% csrf_token %}
+                <input type="hidden" name="itemsJson" id="itemsJson">
                 <div class="col-md-6">
                     <label for="inputtext" class="form-label">Name</label>
                     <input type="text" class="form-control" id="inputtext" name="name">
@@ -83,6 +85,13 @@
                   <button type="submit" class="btn btn-primary">Place Order</button>
                 </div>
               </form>
+              {% comment %} {% else %}
+              <form method=="post" action="/signup">
+                <div class="col-12">
+                  <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#signupModal">Please signup</button>
+                </div>
+              </form>
+              {% endif %} {% endcomment %}
         
         
          </div>
@@ -109,16 +118,21 @@ console.log(cart);
 // {% endcomment %}
 for (item in cart) {
 
-    let name = cart[item][1];
-    let qty = cart[item][0];
-    // sum = sum + qty;
+    let name = cart[item];
+    let qty = cart[item];
+    sum = name + qty;
     mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
                    ${name}
                     <span class="badge badge-primary badge-pill">${qty}</span>
                 </li>`
     $('#items').append(mystr);
 }
-// document.getElementById('cart').innerHTML = sum; 
+document.getElementById('cart').innerHTML = sum;
+$('#itemsJson').val(JSON.stringify(cart));
+{% if thank %}
+alert("your order succefull placed and your oder id is {{id}}")
+localStorage.clear()
+{% endif %}
 </script>{% endblock  %}
 
 {% endblock body %}
