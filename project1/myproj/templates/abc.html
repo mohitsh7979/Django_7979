@@ -125,7 +125,12 @@
         <p class="text"> Country of Origin : INDIA</p>
     </div>
     <div class="container28">
-        <span><button class="btn23">Add To Cart</button><button class="btn23">Buy Now</button></span>
+    <form action="/add-to-cart-m/" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="prod_id_k" value="{{menproducts.id}}" id="prod_id_k">
+        <button type="submit" class="btn23" >Add To Cart</button>
+        {% comment %} <span><button class="btn23">Add To Cart</button><button class="btn23">Buy Now</button></span> {% endcomment %}
+    </div>
     </div>
 
 </body>

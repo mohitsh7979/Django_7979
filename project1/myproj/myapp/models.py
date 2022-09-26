@@ -66,9 +66,29 @@ class order(models.Model):
 class cart(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)
     wproduct=models.ForeignKey(womenproduct, on_delete=models.CASCADE)
-    mproduct=models.ForeignKey(menproduct,on_delete=models.CASCADE)
+    # mproduct=models.ForeignKey(menproduct,on_delete=models.CASCADE)
+    # kproduct=models.ForeignKey(kidsproduct, on_delete=models.CASCADE)
+    quantity=models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return self.wproduct
+
+class kcart(models.Model):
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
     kproduct=models.ForeignKey(kidsproduct, on_delete=models.CASCADE)
     quantity=models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return self.kproduct
+
+class mcart(models.Model):
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
+    mproduct=models.ForeignKey(menproduct, on_delete=models.CASCADE)
+    quantity=models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return self.mproduct
+
 
     # def __str__(self):
     #     return self.user
