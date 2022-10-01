@@ -158,7 +158,9 @@
   </body>
 </html> -->
 
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  
 
 <div class="container my-5">
  <div class="row">
@@ -167,7 +169,7 @@
   <div class="card">
    <div class="card-body">
     <h3>Cart</h3>
-    <div class="row">
+     <div class="row">
       {% for cart in carts  %}
      <div class="col-sm-3 text-center align-self-center"><img src="/media/{{cart.wproduct.image}}" alt="" srcset="" class="img-fluid img-thumbnail shadow-sm" height="150" width="150"> </div>
      <div class="col-sm-9">
@@ -175,10 +177,13 @@
        <h5>{{cart.wproduct.title}}</h5>
        <p class="mb-2 text-muted small">Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum quas, nihil vel velit sed, quos consequatur maiores odio libero eius est in mollitia quo minus dolorum culpa consectetur, ipsam unde!</p>
        <div class="my-3">
-        <label for="quantity">Quantity:</label>
-        <a class="minus-cart btn"><i class="fas fa-minus-square fa-lg"></i></a>
-          <span id="quantity">3</span>
-        <a class="plus-cart btn"><i class="fas fa-plus-square fa-lg"></i></a>
+        <label for="quantity">Quantity:{{cart.quantity}}</label>
+    
+        <!-- <a class="minus-cart btn btn-primary" pid={{cart.wproduct.id}}>-<i class="fas fa-minus-square fa-lg"></i></a> -->
+   
+    <span id="quantity"></span>
+
+        <!-- <a class="plus-cart btn btn-primary" pid={{cart.wproduct.id}}>+<i class="fas fa-plus-square fa-lg"></i></a> -->
        </div> 
        <div class="d-flex justify-content-between">
         <a href="#" class="btn btn-sm btn-secondary mr-3">Remove item </a>
@@ -187,8 +192,9 @@
       </div>
     </div>
   </div>
+ <hr>
   {% endfor %} 
-    <hr class="text-muted">
+     <hr class="text-muted">
     <div class="row my-5">
       {% for kcart in kcarts %}
      <div class="col-sm-3 text-center align-self-center"> <img src="/media/{{kcart.kproduct.image}}" alt="" srcset="" class="img-fluid img-thumbnail shadow-sm" height="150" width="150"></div>
@@ -198,9 +204,9 @@
        <p class="mb-2 text-muted small">Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio corrupti repudiandae quas tenetur? Vel harum iste impedit ad cupiditate sint soluta consequuntur sed, enim, eligendi labore molestiae! Mollitia, ad exercitationem!</p>
        <div class="my-3">
         <label for="quantity">Quantity:</label>
-        <a class="minus-cart btn"><i class="fas fa-minus-square fa-lg"></i></a>
-          <span id="quantity">2</span>
-        <a class="plus-cart btn"><i class="fas fa-plus-square fa-lg"></i></a>
+        <!-- <a class="minus-cart btn btn-primary" pid={{kcart.kproduct.id}}>-<i class="fas fa-minus-square fa-lg"></i></a> -->
+          <span id="quantity">1</span>
+        <!-- <a class="plus-cart btn btn-primary" pid={{kcart.kproduct.id}}>+<i class="fas fa-plus-square fa-lg"></i></a> -->
        </div> 
        <div class="d-flex justify-content-between">
         <a href="#" class="btn btn-sm btn-secondary mr-3">Remove item </a>        
@@ -221,9 +227,9 @@
       <p class="mb-2 text-muted small">Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio corrupti repudiandae quas tenetur? Vel harum iste impedit ad cupiditate sint soluta consequuntur sed, enim, eligendi labore molestiae! Mollitia, ad exercitationem!</p>
       <div class="my-3">
        <label for="quantity">Quantity:</label>
-       <a class="minus-cart btn"><i class="fas fa-minus-square fa-lg"></i></a>
-         <span id="quantity">2</span>
-       <a class="plus-cart btn"><i class="fas fa-plus-square fa-lg"></i></a>
+       <!-- <a class="minus-cart btn btn-primary" pid={{mencart.mproduct.id}}>-<i class="fas fa-minus-square fa-lg"></i></a> -->
+         <span id="quantity">1</span>
+       <!-- <a class="plus-cart btn btn-primary" pid={{mencart.mproduct.id}}>+<i class="fas fa-plus-square fa-lg"></i></a> -->
       </div> 
       <div class="d-flex justify-content-between">
        <a href="#" class="btn btn-sm btn-secondary mr-3">Remove item </a>        
@@ -235,30 +241,13 @@
    {% endfor %}
 
    </div>
-  </div>
+  </div> 
 
-  <div class="col-sm-4">
-   <div class="card">
-    <div class="card-body">
-      <h3>The Total Amount of</h3>
-      <ul class="list-group">
-       <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">Amount<span>{{amount}}</span></li>
-       <li class="list-group-item d-flex justify-content-between align-items-center px-0">Shipping<span>Rs. 70.00</span></li>
-       <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
-        <div>
-           <strong>Total</strong> <small>(including VAT)</small>
-         </div>
-         <span><strong>Rs. {{total_amount}}</strong></span>
-       </li>
-      </ul>
-      <div class="d-grid"><a href="" class="btn btn-primary">Place Order</a></div>
-    </div>
-   </div>
-  </div>
   
  </div>
 </div>
-<div class="container">
+
+<!-- <div class="container">
  <div class="row">
   <div class="col-sm-8">
    <div class="card">
@@ -269,6 +258,49 @@
   </div>
   </div>
  </div>
-</div>
+</div> -->
+
+<div class="col-sm-4">
+  <div class="card">
+   <div class="card-body">
+     <h3>The Total Amount of</h3>
+     <ul class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">Amount<span>{{amount}}</span></li>
+      <li class="list-group-item d-flex justify-content-between align-items-center px-0">Shipping<span>Rs. 70.00</span></li>
+      <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+       <div>
+          <strong>Total</strong> <small>(including VAT)</small>
+        </div>
+        <span><strong>Rs. {{total_amount}}</strong></span>
+      </li>
+     </ul>
+     <div class="d-grid"><a href="/checkout" class="btn btn-primary">Place Order</a></div>
+   </div>
+  </div>
+ </div>
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script>
+$(".minus-cart").click(function(){
+     console.log(id)
+     var id=$(this).attr("pid").toString();
+     document.getElementById('quantity').innerHTML=id;
+})
+
+$(".plus-cart").click(function(){
+ 
+  var id=$(this).attr("pid").toString();
+  console.log(id)
+
+
+
+
+
+  
+})
+
+
+
+</script> -->
 
 {% endblock body %}

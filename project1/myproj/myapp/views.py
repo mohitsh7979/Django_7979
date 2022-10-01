@@ -1,14 +1,22 @@
+from ast import Delete
+from functools import total_ordering
+from itertools import product
+from json import JSONDecodeError
+from sys import stdout
+from typing import ValuesView
 from django.shortcuts import render,redirect,HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.contrib.auth import authenticate
-from myapp.models import shoping
-from myapp.forms import shopingform
-from django.contrib.auth.backends import BaseBackend
+from django.views import View
+# from myapp.models import shoping
 from myapp.models import *
 from math import ceil
+from django.db.models import Q
+from django.http import JsonResponse
+from .forms import CustomUserCreationForm
 
 
 
@@ -57,12 +65,17 @@ def addtokcart(request):
     if request.method=="POST":  
       user=request.user
       product_id=request.POST['prod_id']
+      print(product_id)
       kproduct=kidsproduct.objects.get(id=product_id)
+      quantity=kidsproduct.objects.get(id=product_id)
+      print(kproduct)
       kcart(user=user,kproduct=kproduct).save()
+    #   kcart(user=user,kproduct=kproduct).save()
       
       return redirect("/cart")
 
 def addtomcart(request):
+    
     if request.method=="POST":  
       user=request.user
       product_id_k=request.POST['prod_id_k']
@@ -95,7 +108,7 @@ def showcart(request):
     # print(cart_product)
     # print(kcart_product)
     # print(men_cart_product)
-    if cart_product and kcart_product and men_cart_product:
+    if cart_product or kcart_product or men_cart_product:
         for p in cart_product:
               tempamount=(p.wproduct.price )
               amount+=tempamount
@@ -116,6 +129,7 @@ def showcart(request):
          
         x=amount+newamount+menamount
         y=a+total_amount+c
+        
         
     return render(request,'addtocart.html',{'carts':mcat,'kcarts':kcat,'total_amount':y,'amount':x,'mcarts':mencart})
 
@@ -168,68 +182,134 @@ def electronics(request):
 
     return render(request,'men.html')
 
-def signuphandle(request):
-    if request.method=="POST":
-        username=request.POST['username']
-        fname=request.POST['fname']
-        lname=request.POST['lname']
-        password=request.POST['password']
-        Conformpassword=request.POST['Conformpassword']
 
-        if len(username) >10:
-            messages.error(request,"username must be under 10 character")
-            return redirect('/')
-        if not username.isalnum():
-            messages.error(request,"username should only contain latters and number")
-        if password != Conformpassword:
-            messages.error(request,"password do not match")
-
-
-
-        myuser=shoping(name=username,password=password,first_name=fname,last_name=lname)
-        myuser.save()
-        messages.success(request,"you account has been create succefull")
-        return redirect("/men")
-    else:
-        return HttpResponse('404 page not found')
-
-def loginhandle(request):
-    if request.method == 'POST':
-        username = request.POST['loginusername']
-        password = request.POST['pass']
-        # print("username")
-        # print(username)
-        # print(password)
-        # myshoping=shoping()
-        # myshoping.name=username
-        # myshoping.password=password
-        # myshoping.save()
-        
-
-        user=shoping(request, name=username, password=password)
-        if user is not None:
-            login(request,user)
-            return redirect("/kids")
-        else:
-             return redirect("/about")
-         
-        # user = authenticate(request, name=username, password=password)
-        # print(user)
-
-        # if user is not None:
-        #     login(request,user)
-        #     return redirect("/kids")
-        # else:
-            
-        #     return redirect("/about")
-        
 
 def logouthandle(request):
     logout(request)
     messages.success(request,"successfull Logout !!!!")
     return redirect("/home")
 
+# def pluscart(request):
+#     if request.method=="POST":
+#         prod_id=request.POST['prod_id']
+    
+#         print(prod_id)
+#         c=cart.objects.get(Q(wproduct=prod_id) & Q(user=request.user))
+#         print(c)
+     
+#         c.quantity+=1
+#         c.save()
+#         amount=0.0
+#         shipping_amount=70.0
+#         cart_product=[p for p in cart.objects.all() if p.user == request.user]
+        
+#         for p in cart_product:
+#             tempamount=(p.wproduct.price)
+#             amount+=tempamount
+#             total_amount=amount+shipping_amount
+
+#         data = {
+#         'quantity':c.quantity,
+#         'amount':amount,
+#         'totalamount':total_amount
+#          }
+
+#         # return JsonResponse(data)
+#     return render(request,'men.html')
+
+
+def checkout(request):
+    user=request.user
+    add=shoping.objects.filter()
+    cart_items=cart.objects.filter()
+    kcart_items=kcart.objects.filter()
+    mcart_items=mcart.objects.filter()
+    amount=0.0
+    mamount=0.0
+    kamount=0.0
+    shipping_amount=70
+    total_amount=0.0
+    mtotal_amount=0.0
+    ktotal_amount=0.0
+    whole_amount=0.0
+    cart_product=[p for p in cart.objects.all()]
+    kcart_product=[p for p in kcart.objects.all()]
+    mcart_product=[p for p in mcart.objects.all()]
+    if cart_product or kcart_product or mcart_product :
+        for p in cart_product:
+            tempamount=(p.wproduct.price)
+            amount+=tempamount
+            total_amount=amount+shipping_amount
+            print(total_amount)
+
+
+        for p in kcart_product:
+            print(kcart_product)
+            ktempamount=(p.kproduct.price)
+            kamount+=ktempamount
+            ktotal_amount=kamount+shipping_amount
+            print(ktotal_amount)
+
+        for p in mcart_product:
+            print(mcart_product)
+            mtempamount=(p.mproduct.price)
+            mamount+=mtempamount
+            mtotal_amount=mamount+shipping_amount
+            print(mtotal_amount)
+
+
+    whole_amount=total_amount+ktotal_amount+mtotal_amount+shipping_amount
+
+    return render(request,'checkout.html',{'add':add,'whole_amount':whole_amount,'cart_items':cart_items,'kcart_items':kcart_items,'mcart_items':mcart_items})
 
 
 
+# def payment_done(request):
+#     user=request.user
+#     custid=request.POST['custid']
+#     customer=shoping.objects.get(id=custid)
+#     cart_=cart.objects.filter(user=user)
+#     for c in cart_:
+#         orderplaced(user=user,customer=customer,product=c.wproduct,quantity=c.quantity).save()
+#         c.delete()
+#     return redirect("orderes")
 
+
+# def register(request):  
+#     if request.POST == 'POST':  
+#         form = CustomUserCreationForm()  
+#         if form.is_valid():  
+#             form.save()  
+#             messages.success(request,'Congratualtions!! Registerd Successfull')
+#     else:  
+#         form = CustomUserCreationForm()  
+#     context = {  
+#         'form':form  
+#     }  
+#     return render(request, 'register.html', context)  
+
+class CustomUserCreationView(View):
+    def get(self,request):
+        form=CustomUserCreationForm()
+        messages.success(request,'Congratualtions!! Registerd Successfull')
+        return render(request,'register.html',{'form':form})
+
+    def post(self,request):
+        form=CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return render(request,'register.html',{'form':form})
+
+
+def profile(request):
+    # if request.method=="POST":
+    #     name=request.POST['name']
+    #     address=request.POST['address'] #+' '+request.POST['address2']
+    #     city=request.POST['city']
+    #     state=request.POST['state']
+    #     zipcode=request.POST['zip']
+
+    #     myuser=shoping(name=name,address=address,city=city,state=state,zipcode=zipcode,address2=address)
+    #     myuser.save()
+
+    return render(request,'profile.html')

@@ -1,19 +1,23 @@
 from distutils.command.upload import upload
-import email
+
 from email.policy import default
 from turtle import title
+from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import MaxValueValidator,MinValueValidator
 
 
-# Create your models here.
+
+# # Create your models here.
 class shoping(models.Model):
-    id=models.AutoField
-    name=models.CharField(max_length=10)
-    password=models.CharField(max_length=10)
-    first_name=models.CharField(max_length=10)
-    last_name=models.CharField(max_length=10)
+    # user=models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
+    # id=models.AutoField(primary_key=True,default=1)
+    name=models.CharField(max_length=10,default=0)
+    address=models.CharField(max_length=100,default=0)
+    # address2=models.CharField(max_length=30)
+    city=models.CharField(max_length=30,default=0)
+    state=models.CharField(max_length=30,default=0)
+    zipcode=models.CharField(max_length=30,default=0)
    
 
     def __str__(self):
@@ -50,7 +54,7 @@ class kidsproduct(models.Model):
         return self.title
 
 class order(models.Model):
-    order_id= models.AutoField(primary_key=True)
+    order_id= models.AutoField
     items_json= models.CharField(max_length=5000)
     name=models.CharField(max_length=100)
     email=models.CharField(max_length=100)
@@ -60,7 +64,7 @@ class order(models.Model):
     state=models.CharField(max_length=100)
     city=models.CharField(max_length=100)
 
-    def __str__(self):
+def __str__(self):
       return self.name
 
 class cart(models.Model):
@@ -69,15 +73,21 @@ class cart(models.Model):
     # mproduct=models.ForeignKey(menproduct,on_delete=models.CASCADE)
     # kproduct=models.ForeignKey(kidsproduct, on_delete=models.CASCADE)
     quantity=models.PositiveIntegerField(default=1)
+@property
+def total_cost(self):
+    return self.wproduct.price
 
-    def __str__(self):
-        return self.wproduct
+    # def __str__(self):
+    #     return self.wproduct
 
 class kcart(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)
     kproduct=models.ForeignKey(kidsproduct, on_delete=models.CASCADE)
     quantity=models.PositiveIntegerField(default=1)
 
+# @property
+def total_cost_k(self):
+    return self.kproduct.price
     def __str__(self):
         return self.kproduct
 
@@ -86,12 +96,19 @@ class mcart(models.Model):
     mproduct=models.ForeignKey(menproduct, on_delete=models.CASCADE)
     quantity=models.PositiveIntegerField(default=1)
 
-    def __str__(self):
-        return self.mproduct
+# # @property
+# def total_cost_m(self):
+#     return self.mproduct.price
+    # def __str__(self):
+    #     return self.mproduct
 
 
     # def __str__(self):
     #     return self.user
+
+# class orderplaced(models.Model):
+#     customer=models.CharField(max_lenght=100)
+
 
 
 

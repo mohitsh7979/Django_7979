@@ -11,7 +11,7 @@
   text-align: center;
   font-family: arial;
   float: left;
-  margin: 37px 150px;
+  margin: 37px 130px;
 }
 ​
 .price {
@@ -29,6 +29,7 @@
   cursor: pointer;
   width: 100%;
   font-size: 18px;
+
 }
 ​
 .card button:hover {
@@ -44,6 +45,7 @@
         text-decoration:none;
         color:black;
 }
+
 </style>
 </head>
 <body>
@@ -53,8 +55,8 @@
 <div class="card">
   <a href="/kidproduct/{{ kid.id }}">
   <img src="/media/{{kid.image}}" alt="Denim Jeans" style="width:100%" class="mens">
-  <h1>{{kid.title}}</h1>
-  <p class="price">{{kid.price}}</p>
+  <p style="color:grey">{{kid.title}}</p>
+  <h3 class="price">{{kid.price}}</h3>
   <p>{{kid.desc}}</p>
   </a>
 </div>

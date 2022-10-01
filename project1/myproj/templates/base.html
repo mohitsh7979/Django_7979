@@ -36,18 +36,29 @@
       </ul>
 
 
-      <div class="col-md-3 text-end">
+      <div class="xyz">
         {% if user.is_authenticated %}
         you are loged in {{request.user}}
         {% else %}
-        <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#loginModal">
-          Log in
-        </button>
-        <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#signupModal">
-          Signup
-        </button>
+        <form action="/account/login" class="d-inline-block">
+          <button type="submit" class="btn btn-primary">
+            Log in
+          </button>
+        </form>
+        <form action="/register" class="d-inline-block">
+          
+          <button type="submit" class="btn btn-primary">
+            Registration
+          </button>
+          </form>
 
         {% endif %}
+
+        <form action="/cart" class="d-inline-block">
+          <button type="submit" class="btn btn-primary" style="margin:0px 2px">
+            Cart{{cart.wproduct.quantity}}
+          </button>
+          </form>
 
       </div>
 
@@ -57,11 +68,7 @@
       </button> -->
      <!-- Button trigger modal -->
 {% comment %} {% if user.is_authenticated  %} {% endcomment %}
-<form action="/cart">
-<button type="submit" class="btn btn-primary">
-  Cart{{cart.wproduct.quantity}}
-</button>
-</form>
+
 {% comment %} {% endif %} {% endcomment %}
 <!-- Modal -->
 {% comment %} <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -81,12 +88,13 @@
     </div>
   </div>
 </div> {% endcomment %}
+
     </header>
     
   </div>
 
 
-  <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signuupModal" aria-hidden="true">
+  {% comment %} <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signuupModal" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -109,10 +117,10 @@
               <label for="lname" class="form-label">lname</label>
               <input type="text" class="form-control" id="lname" name="lname" required>
             </div>
-            {% comment %} <div class="col-md-12">
+            <div class="col-md-12">
               <label for="email" class="form-label">Email</label>
               <input type="email" class="form-control" id="email" name="email" required>
-            </div> {% endcomment %}
+            </div> 
             <div class="col-md-6">
               <label for="password" class="form-label">Password</label>
               <input type="password" class="form-control" id="password" name="password" required>
@@ -123,7 +131,7 @@
             </div>
             <div class="col-12">
               <label for="inputAddress" class="form-label">Address</label>
-              <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" required>
+              <input type="text" class="form-control" id="inputAddress" name="address" placeholder="1234 Main St" required>
             </div>
 
             <div class="col-md-6">
@@ -153,25 +161,25 @@
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               <button type="Sign in" class="btn btn-primary">Sign in</button>
             </div>
-            {% comment %} <div class="col-12">
+             <div class="col-12">
               <button type="submit" class="btn btn-primary">Sign in</button>
-            </div> {% endcomment %}
+            </div>
 
           </form>
         </div>
-        {% comment %} <div class="modal-footer">
+        <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary">Sign in</button>
-        </div> {% endcomment %}
+        </div> 
       </div>
     </div>
-  </div>
+  </div> {% endcomment %}
 
 
 
   {% comment %} login------- {% endcomment %}
 
-  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
+  {% comment %} <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -203,16 +211,16 @@
       </div>
     </div>
   </div>
-  </div>
+  </div> {% endcomment %}
 
 
 
   {% block body %}{% endblock body %}
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  {% block js %}
 
-  <script>
+
+  {% comment %} <script>
 
 
     console.log("Hello World")
@@ -241,8 +249,8 @@
       console.log(cart);
       localStorage.setItem('cart', JSON.stringify(cart));
         document.getElementById('cart').innerHTML = Object.keys(cart).length;
-      });
-      // updatecart(cart);
+      }); {% endcomment %}
+      {% comment %} // updatecart(cart);
    
 
 
@@ -299,7 +307,7 @@
 
 
   </script>
-  {% endblock js %}
+  {% endblock js %} {% endcomment %}
 
 
 </body>

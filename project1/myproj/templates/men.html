@@ -14,7 +14,8 @@
   text-align: center;
   font-family: arial;
   float: left;
-  margin: 37px 150px;
+  margin: 37px 132px;
+  
 }
 ​
 .price {
@@ -41,6 +42,7 @@
 .mens{
         height: 193px;
         width: 100px;
+        
 
 }
 .card a{
@@ -58,9 +60,10 @@
   <div class="card">
     <a href="/abc/{{ pro.id }}">
       <img src="/media/{{ pro.image }}" alt="Denim Jeans" style="width:100%" class="mens">
-      <h1>{{pro.title}}</h1>
-      <p class="price">{{pro.price}}</p>
+      <p style="color:grey">{{pro.title}}</p>
+      <h3 class="price">₹{{pro.price}}</h3>
       <p>{{pro.desc}}</p>
+      
     </a>
   </div>
 {% endfor %}
