@@ -1,0 +1,76 @@
+{% extends 'index.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  /* margin: auto; */
+  text-align: center;
+  font-family: arial;
+  float: left;
+  margin: 37px 135px;
+  width: 15%;
+  
+}
+​
+.price {
+  color: grey;
+  font-size: 22px;
+}
+​
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+
+}
+​
+.card button:hover {
+  opacity: 0.7;
+}
+
+.mens{
+        height: 193px;
+        width: 100px;
+        
+
+}
+.card a{
+          text-decoration: none;
+          color:#000
+
+} 
+
+
+</style>
+</head>
+<body>
+​
+<h2 style="text-align:center">Men's Product</h2>
+​
+{% for k  in kid %}
+ <div class="card">
+    <a href="/abc/{{ k.id }}">
+      <img src="/media/{{ k.image }}" alt="Denim Jeans" style="width:100%" class="mens">
+      <p style="color:grey">{{k.title}}</p>
+      <h3 class="price">₹{{k.price}}</h3>
+    
+      
+    </a>
+  </div> 
+
+{% endfor %}
+  
+​
+</body>
+</html>
+{% endblock body %}
