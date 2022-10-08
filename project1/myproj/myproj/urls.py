@@ -35,9 +35,9 @@ urlpatterns = [
     path('new/',views.new),
     path('add/',views.add),
     path('cart/',views.showcart),
-    path('profile/',views.profile,name="profile"),
+
     # path('abc/',views.abc,name="abc"),
-   
+    path("profile/", views.profile, name = "profile_view"),
     # path('login',views.loginhandle,name="loginhandle"),
     path('logout/',views.logouthandle,name="logouthandle"),
     path('abc/<int:id>',views.abc,name="abc"),

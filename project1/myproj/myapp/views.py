@@ -88,8 +88,8 @@ def addtomcart(request):
 
 
 def showcart(request):
-    user=request.user
-    mcat=cart.objects.filter(user=user)
+    # user=request.user
+    mcat=cart.objects.filter()
     kcat=kcart.objects.filter(user=user)
     mencart=mcart.objects.filter(user=user)
     amount=0.0
@@ -97,13 +97,11 @@ def showcart(request):
     menamount=0.0
     shipping_amount=70.0
     a=0.0
-    x=0.0
-    y=0.0
-    c=0.0
+    x=0
     total_amount=0.0
-    cart_product=[p for p in cart.objects.all() if p.user==user ]
-    kcart_product=[p for p in kcart.objects.all() if p.user==user]
-    men_cart_product=[p for p in mcart.objects.all() if p.user==user]
+    cart_product=[p for p in cart.objects.all() ]
+    kcart_product=[p for p in kcart.objects.all()]
+    men_cart_product=[p for p in mcart.objects.all()]
     # cart_product.extend(kcart_product)
     # print(cart_product)
     # print(kcart_product)

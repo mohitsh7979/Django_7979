@@ -10,8 +10,8 @@ from django.contrib.auth.models import User
 
 # # Create your models here.
 class shoping(models.Model):
-    # user=models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
-    # id=models.AutoField(primary_key=True,default=1)
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
+    # id=models.AutoField
     name=models.CharField(max_length=10,default=0)
     address=models.CharField(max_length=100,default=0)
     # address2=models.CharField(max_length=30)
@@ -24,7 +24,7 @@ class shoping(models.Model):
         return self.name
 
 class menproduct(models.Model):
-    id=models.AutoField
+    # id=models.AutoField
     title=models.CharField(max_length=30)
     price=models.IntegerField(default=0)
     desc=models.CharField(max_length=50)
@@ -34,7 +34,7 @@ class menproduct(models.Model):
         return self.title
 
 class womenproduct(models.Model):
-    id=models.AutoField
+    # id=models.AutoField
     title=models.CharField(max_length=30)
     price=models.IntegerField(default=0)
     desc=models.CharField(max_length=50)
@@ -44,7 +44,7 @@ class womenproduct(models.Model):
         return self.title
     
 class kidsproduct(models.Model):
-    id=models.AutoField
+    # id=models.AutoField
     title=models.CharField(max_length=30)
     price=models.IntegerField(default=0)
     desc=models.CharField(max_length=50)
@@ -54,7 +54,7 @@ class kidsproduct(models.Model):
         return self.title
 
 class order(models.Model):
-    order_id= models.AutoField
+    # order_id= models.AutoField
     items_json= models.CharField(max_length=5000)
     name=models.CharField(max_length=100)
     email=models.CharField(max_length=100)

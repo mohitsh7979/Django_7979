@@ -14,7 +14,8 @@
   text-align: center;
   font-family: arial;
   float: left;
-  margin: 37px 132px;
+  margin: 37px 160px;
+  width:20%;
   
 }
 ​
@@ -33,6 +34,7 @@
   cursor: pointer;
   width: 100%;
   font-size: 18px;
+
 }
 ​
 .card button:hover {
@@ -49,7 +51,9 @@
           text-decoration: none;
           color:#000
 
-}
+} 
+
+
 </style>
 </head>
 <body>
@@ -57,7 +61,7 @@
 <h2 style="text-align:center">Men's Product</h2>
 ​
 {% for pro  in products %}
-  <div class="card">
+ <div class="card">
     <a href="/abc/{{ pro.id }}">
       <img src="/media/{{ pro.image }}" alt="Denim Jeans" style="width:100%" class="mens">
       <p style="color:grey">{{pro.title}}</p>
@@ -65,7 +69,8 @@
       <p>{{pro.desc}}</p>
       
     </a>
-  </div>
+  </div> 
+
 {% endfor %}
   
 ​

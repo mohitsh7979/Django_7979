@@ -80,11 +80,14 @@
             height: 57px;
             background-color: transparent;
         }
-        
+        .buy{
+            margin:-96px 214px;
+        }
     </style>
 </head>
 
 <body>
+    <div class"d-inline-block">
     <div class="container24">
         <img src="/media/{{menproducts.image}}"style="width:100%;height: 496px;" class="mens"></div>
     <div class="container25"> <span style="color: grey;">{{menproducts.title}}</span>
@@ -128,16 +131,19 @@
     <form action="/add-to-cart-m/" method="post">
         {% csrf_token %}
         <input type="hidden" name="prod_id_k" value="{{menproducts.id}}" id="prod_id_k">
-        <button type="submit" class="btn23" >Add To Cart</button>   </form>
+        <button type="submit" class="btn23" >Add To Cart</button>  
+    </form>
+
         <form action="/buy" class="buy">
             <button class="btn23">Buy Now</button>
-            </form>  
+        </form>  
         {% comment %} <span><button class="btn23">Add To Cart</button><button class="btn23">Buy Now</button></span> {% endcomment %}
  
     
     </div>
    
     </div>
+</div>
 
 </body>
 
